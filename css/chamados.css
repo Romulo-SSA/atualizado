@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(-45deg, #fff0ce, #512bf7, #2913f0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background: #fff;
+  border-radius: 10px;
+  padding: 40px;
+  width: 100%;
+  max-width: 600px;
+  color: #2b344b;
+  animation: iniciar 1.2s ease-out;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.btn-link {
+  background: linear-gradient(-45deg, #fff0ce, #512bf7, #2913f0);
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.btn-link:hover {
+  background: linear-gradient(-45deg, #a4abeb, #4324ca, #210fc5);
+}
+
+.logout-btn {
+  background: transparent;
+  border: 2px solid #512bf7;
+  color: #512bf7;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #512bf7;
+  color: #fff;
+}
+
+.chamado-lista {
+  list-style: none;
+  padding: 0;
+}
+
+.chamado-lista li {
+  background: #f0f0f0;
+  padding: 15px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  font-size: 1em;
+  color: #333;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+@keyframes iniciar {
+  0% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

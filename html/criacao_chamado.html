@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Novo Chamado</title>
+  <link rel="stylesheet" href="/css/novo-chamado.css" />
+</head>
+<body>
+  <div class="container">
+    <h2 class="title">Novo Chamado</h2>
+    <form id="formChamado">
+      
+      <div class="input">
+        <input type="text" id="titulo" placeholder="Título" required />
+      </div>
+
+      <div class="input">
+        <textarea id="descricao" placeholder="Descreva o problema" required></textarea>
+      </div>
+
+      <div class="input">
+        <select id="status" required>
+          <option disabled selected value="">Selecione a prioridade</option>
+          <option value="ativo">ativo</option>
+          <option value="inativo">inativo</option>
+        </select>
+      </div>
+
+      <div class="btn">
+        <button type="submit">Criar Chamado</button>
+      </div>
+    </form>
+
+    <p style="margin-top: 20px; text-align: center;">
+      <a href="chamados.html">← Voltar</a>
+    </p>
+  </div>
+
+  <script>
+    document.getElementById("formChamado").addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const titulo = document.getElementById("titulo").value;
+  const descricao = document.getElementById("descricao").value;
+  const status = document.getElementById("status").value;
+
+  const usuario_id = localStorage.getItem("usuario_id");
+
+  if (!usuario_id) {
+    alert("Usuário não logado!");
+    return;
+  }
+
+  fetch("http://localhost:3000/api/chamados", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ titulo, descricao, status, usuario_id })
+  })
+  .then(response => {
+    if (!response.ok) throw new Error("Erro ao criar chamado");
+    alert("Chamado criado com sucesso!");
+    window.location.href = "dashboard.html";
+  })
+  .catch(error => {
+    console.error("Erro:", error);
+    alert("Erro ao criar chamado.");
+  });
+});
+ </script>
+  
+
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro - Sistema de Chamados</title>
+  <link rel="stylesheet" href="/css/registro.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+  <div class="container">
+    <h2 class="title">Cadastro</h2>
+    <form id="registerForm">
+      <div class="input">
+        <i class="fa fa-user"></i>
+        <input type="text" id="nome" placeholder="Nome" required />
+      </div>
+
+      <div class="input">
+        <i class="fa fa-envelope"></i>
+        <input type="email" id="email" placeholder="Email" required />
+      </div>
+
+      <div class="input">
+        <i class="fa fa-lock"></i>
+        <input type="password" id="password" placeholder="Senha" required minlength="6" />
+      </div>
+
+      <div class="btn">
+        <button type="submit">Cadastrar</button>
+      </div>
+    </form>
+
+    <p style="margin-top: 20px;">Já tem uma conta? <a href="index.html">Faça login</a></p>
+  </div>
+
+  <script>
+  document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const nome = document.getElementById('nome').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    
+    try {
+      const response = await fetch('http://localhost:3000/api/usuarios', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ nome, email, senha: password })
+      });
+      
+      if (!response.ok) throw new Error('Erro no cadastro');
+      
+      alert('Cadastro realizado com sucesso!');
+      window.location.href = 'index.html';
+    } catch (error) {
+      console.error('Erro:', error);
+      alert('Erro ao cadastrar. Tente novamente.');
+    }
+  });
+</script>
+</body>
+</html>

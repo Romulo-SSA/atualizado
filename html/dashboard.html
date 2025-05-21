@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Chamados</title>
+  <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+  <div class="container">
+    <h2 class="title">Dashboard de Chamados</h2>
+    <div class="actions">
+      <a class="btn-link" href="criacao_chamado.html">+ Novo Chamado</a>
+    </div>
+    <div id="chamadosContainer"></div>
+  </div>
+
+  <script>
+    async function carregarChamados() {
+      const container = document.getElementById("chamadosContainer");
+      try {
+        const res = await fetch("http://localhost:3000/api/chamados");
+        const chamados = await res.json();
+
+        if (!chamados.length) {
+          container.innerHTML = '<p>Nenhum chamado encontrado.</p>';
+          return;
+        }
+
+        chamados.forEach(c => {
+          const div = document.createElement("div");
+          div.className = "chamado-box";
+          div.innerHTML = `
+            <p><strong>ID:</strong> ${c.id}</p>
+            <p><strong>Título:</strong> ${c.titulo}</p>
+            <p><strong>Descrição:</strong> ${c.descricao}</p>
+            <p><strong>Status:</strong> ${c.status}</p>
+            <p><strong>Autor:</strong> ${c.nome_usuario}</p>
+            <p><strong>Data de Criação:</strong> ${new Date(c.data_criacao).toLocaleString()}</p>
+          `;
+          container.appendChild(div);
+        });
+      } catch (err) {
+        container.innerHTML = '<p>Erro ao carregar os chamados.</p>';
+        console.error(err);
+      }
+    }
+
+    carregarChamados();
+  </script>
+</body>
+</html>

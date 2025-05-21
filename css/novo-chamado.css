@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(-45deg, #fff0ce, #512bf7, #2913f0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  background: #fff;
+  border-radius: 10px;
+  padding: 60px;
+  width: 100%;
+  max-width: 400px;
+  color: #2b344b;
+  animation: iniciar 1.6s ease-out;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-size: 1.8em;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.input {
+  margin-bottom: 15px;
+}
+
+.input input,
+.input textarea,
+.input select {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 22px;
+  border: 2px solid #6f7e8a;
+  outline: none;
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  color: #2b344b;
+  resize: none;
+}
+
+.input textarea {
+  height: 100px;
+  border-radius: 15px;
+}
+
+.input select {
+  appearance: none;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.btn {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.btn button {
+  font-family: "Poppins", sans-serif;
+  background: linear-gradient(-45deg, #fff0ce, #512bf7, #2913f0);
+  width: 100%;
+  height: 40px;
+  border: none;
+  font-size: 1.2em;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn button:hover {
+  background: linear-gradient(-45deg, #a4abeb, #4324ca, #210fc5);
+}
+
+a {
+  color: #2913f0;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+@keyframes iniciar {
+  0% {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

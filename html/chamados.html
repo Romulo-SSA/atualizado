@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard - Sistema de Chamados</title>
+  <link rel="stylesheet" href="/css/chamados.css" />
+</head>
+<body>
+  <div class="container">
+    <h2 class="title">Meus Chamados</h2>
+
+    <div class="actions">
+      <a class="btn-link" href="criacao_chamado.html">+ Novo Chamado</a>
+      <button class="logout-btn">Sair</button>
+    </div>
+
+    <ul id="chamadosLista" class="chamado-lista">
+      
+    </ul>
+  </div>
+
+  <script>
+    fetch("http://localhost:3000/api/chamados")
+      .then(response => response.json())
+      .then(data => {
+        const lista = document.getElementById("chamadosLista");
+        data.forEach(chamado => {
+          const li = document.createElement("li");
+          li.textContent = `#${chamado.id} - ${chamado.titulo}`;
+          lista.appendChild(li);
+        });
+      })
+      .catch(error => {
+        console.error("Erro ao carregar chamados:", error);
+         document.querySelector('.logout-btn').addEventListener('click', function() {
+    localStorage.clear();
+    window.location.href = "index.html";
+  });
+      });
+  </script>
+  
+</body>
+</html>

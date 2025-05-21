@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Sistema de Chamados</title>
+  <link rel="stylesheet" href="/css/formularioLogin.css" />
+  <script src="https://kit.fontawesome.com/cd03ec8ae8.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="container">
+    
+    
+    <form id="loginForm">
+      
+      <h2 class="title">Login</h2>
+
+      <div class="input">
+        <i class="fa-regular fa-envelope"></i>
+        <input type="email" id="email" placeholder="Email" required />
+      </div>
+
+      <div class="input">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" id="password" placeholder="Senha" required />
+      </div>
+      
+    
+      <div class="btn">
+        <button type="submit">Entrar</button>
+      </div>
+      
+    </form>
+  
+    <p>Não tem uma conta? <a href="registro.html">Cadastre-se</a></p>
+  
+  </div>
+
+  <script>
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    try {
+      const response = await fetch("http://localhost:3000/api/usuarios/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email, senha: password })
+      });
+
+      if (!response.ok) {
+  let erroMsg = "Erro ao fazer login";
+
+  const raw = await response.text(); // lê o corpo uma vez só
+
+  try {
+    const erro = JSON.parse(raw); // tenta converter para JSON
+    erroMsg = erro.message || erroMsg;
+  } catch (e) {
+    console.warn("Resposta não JSON:", raw); // se não for JSON, mostra como texto
+    erroMsg = raw || erroMsg;
+  }
+
+  alert(erroMsg);
+  return;
+}
+
+      const user = await response.json();
+
+      localStorage.setItem("usuario_id", user.id);
+      localStorage.setItem("usuario_nome", user.nome);
+      window.location.href = "dashboard.html";
+
+    } catch (err) {
+      console.error("Erro:", err);
+      alert("Erro inesperado ao fazer login.");
+      
+      document.querySelector('.logout-btn').addEventListener('click', function() {
+    localStorage.clear();
+    window.location.href = "index.html";
+  });
+    }
+  });
+</script>
+
+</body>
+</html>
